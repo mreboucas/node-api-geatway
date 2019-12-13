@@ -27,6 +27,7 @@ express-http-proxy [invoke others end points]</br>
 cookie-parser [cookie parsing requests]</br>
 
 <h2> Microservice 1 </h2>
+
 ```
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -60,7 +61,9 @@ app.listen(port, () => {
 <h1> Gateway </h1>
 
 <h3> Constants URLS - Microservices </h3>
+
 touch URL.js
+
 ```
 module.exports = {
   URL_API_1: 'http://localhost:3001',
@@ -79,6 +82,7 @@ npm install http express morgan helmet express-http-proxy cookie-parser
 touch index.js
 
 ```
+
 var http = require('http');
 const express = require('express')
 const httpProxy = require('express-http-proxy')
