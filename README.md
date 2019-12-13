@@ -19,3 +19,13 @@ A node api gateway to manager micoservices
 
 
 <h2> Plugins </h2>
+http [create a server http basic]</br>
+express [create routes api]</br>
+morgan [log]</br>
+helmet [protect atacks]</br>
+express-http-proxy [invoke others end points]</br>
+cookie-parser [cookie parsing requests]</br>
+
+```
+npm install http express morgan helmet express-http-proxy cookie-parser
+```
