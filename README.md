@@ -30,15 +30,6 @@ cookie-parser [cookie parsing requests]</br>
 
 <b>touch queries-pg.js</b>
 
-/**
- * https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
- * 
- * 
- * https://imasters.com.br/apis-microsservicos/api-gateway-em-arquitetura-de-microservices-com-node-js
- * 
- * https://medium.com/caquicoders/criando-um-simples-api-gateway-com-nodejs-e-express-2ec5369e975d
- * 
- */
 const Pool = require('pg').Pool
 const httpStatusCode = require('./http-status-code.js')
 
@@ -50,6 +41,7 @@ const pool = new Pool({
     port: 
 })
 
+```
 const getUsers = (request, response) => {
     console.log('Finding all users - start')
     pool.query('select * from TABELA  order by NAME_COLUM', (error, results) => {
@@ -72,11 +64,12 @@ const getReunions = (request, response) => {
     })
 }
 
+
 module.exports = {
     getUsers,
     getReunions
 }
-
+```
 
 <b>touch index.js</b>
 
