@@ -1,4 +1,4 @@
-# node-api-geatway
+# node-api-gateway
 A node api gateway to manager micoservices
 
 
@@ -22,7 +22,7 @@ A node api gateway to manager micoservices
 http [create a server http basic]</br>
 express [create routes api]</br>
 morgan [log]</br>
-helmet [protect atacks]</br>
+helmet [protect attacks]</br>
 express-http-proxy [invoke others end points]</br>
 cookie-parser [cookie parsing requests]</br>
 
