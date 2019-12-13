@@ -28,6 +28,58 @@ cookie-parser [cookie parsing requests]</br>
 
 <h2> Microservice 1 </h2>
 
+<b>touch queries-pg.js</b>
+
+/**
+ * https://blog.logrocket.com/setting-up-a-restful-api-with-node-js-and-postgresql-d96d6fc892d8/
+ * 
+ * 
+ * https://imasters.com.br/apis-microsservicos/api-gateway-em-arquitetura-de-microservices-com-node-js
+ * 
+ * https://medium.com/caquicoders/criando-um-simples-api-gateway-com-nodejs-e-express-2ec5369e975d
+ * 
+ */
+const Pool = require('pg').Pool
+const httpStatusCode = require('./http-status-code.js')
+
+const pool = new Pool({
+    user: '',
+    host: '',
+    database: '',
+    password: '',
+    port: 
+})
+
+const getUsers = (request, response) => {
+    console.log('Finding all users - start')
+    pool.query('select * from TABELA  order by NAME_COLUM', (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+        console.log('Finding all users - finish')
+    })
+}
+
+const getReunions = (request, response) => {
+    console.log('Finding all reunions - start')
+    pool.query('select * from TABELA2  order by NAME_COLUM2', (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+        console.log('Finding all reunions - finish')
+    })
+}
+
+module.exports = {
+    getUsers,
+    getReunions
+}
+
+
+<b>touch index.js</b>
+
 ```
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -66,8 +118,8 @@ touch URL.js
 
 ```
 module.exports = {
-  URL_API_1: 'http://localhost:3001',
-  URL_API_1: 'http://localhost:3002',
+  URL_API_MICROSERVICE_1: 'http://localhost:3001',
+  URL_API_MICROSERVICE_2: 'http://localhost:3002',
 };
 
 ```
@@ -90,17 +142,25 @@ const app = express()
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const helmet = require('helmet');
+const {
+  URL_API_MICROSERVICE_1,
+  URL_API_MICROSERVICE_2,
+} = require('./URLs');
 
-const userServiceProxy = httpProxy('http://localhost:3001');
-const productsServiceProxy = httpProxy('http://localhost:3002');
+const userviceProxy1 = httpProxy(URL_API_MICROSERVICE_1);
+const userviceProxy2 = httpProxy(URL_API_MICROSERVICE_2);
 
 // Proxy request
 app.get('/users', (req, res, next) => {
-  userServiceProxy(req, res, next);
+  userviceProxy1(req, res, next);
 })
 
-app.get('/products', (req, res, next) => {
-  productsServiceProxy(req, res, next);
+app.get('/reunions', (req, res, next) => {
+  userviceProxy1(req, res, next);
+})
+
+app.get('/TODO', (req, res, next) => {
+  userviceProxy2(req, res, next);
 })
 
 app.use(logger('dev'));
