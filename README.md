@@ -30,6 +30,7 @@ cookie-parser [cookie parsing requests]</br>
 
 <b>touch queries-pg.js</b>
 
+```
 const Pool = require('pg').Pool
 const httpStatusCode = require('./http-status-code.js')
 
@@ -41,7 +42,7 @@ const pool = new Pool({
     port: 
 })
 
-```
+
 const getUsers = (request, response) => {
     console.log('Finding all users - start')
     pool.query('select * from TABELA  order by NAME_COLUM', (error, results) => {
