@@ -26,14 +26,8 @@ helmet [protect atacks]</br>
 express-http-proxy [invoke others end points]</br>
 cookie-parser [cookie parsing requests]</br>
 
-```
-npm install http express morgan helmet express-http-proxy cookie-parser
-```
-
-
-<h2> Constants URLS - Microservices </h2>
-
 <h2> Microservice 1 </h2>
+```
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -58,19 +52,33 @@ app.get('/users', dbPg.getUsers)
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
   })
+```
 
 <h2> Microservice 2 </h2>
 
 
-<h2> Gateway </h2>
+<h1> Gateway </h1>
+
+<h3> Constants URLS - Microservices </h3>
 touch URL.js
+```
 module.exports = {
   URL_API_1: 'http://localhost:3001',
   URL_API_1: 'http://localhost:3002',
 };
 
+```
+
+```
+npm install http express morgan helmet express-http-proxy cookie-parser
+```
+
 
 <b>index.js</b>
+
+touch index.js
+
+```
 var http = require('http');
 const express = require('express')
 const httpProxy = require('express-http-proxy')
@@ -99,3 +107,5 @@ app.use(cookieParser());
 
 var server = http.createServer(app);
 server.listen(3000);
+
+```
